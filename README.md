@@ -21,7 +21,7 @@ A Flask-based chat application that uses the Perplexity AI API for intelligent c
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/plexchat.git
+git clone https://github.com/laudanum123/plexchat.git
 cd plexchat
 ```
 
