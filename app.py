@@ -55,13 +55,13 @@ def chat():
     try:
         user_message = request.json['message']
         
-        # Get conversation history from session
-        messages = session.get('messages', [
+        # Get conversation history from session and create a new list
+        messages = list(session.get('messages', [
             {
                 "role": "system",
                 "content": "You are a helpful AI assistant. Provide clear and concise responses."
             }
-        ])
+        ]))
         
         # Add user message to history
         messages.append({
@@ -89,6 +89,7 @@ def chat():
         
         # Update session with new history
         session['messages'] = messages
+        session.modified = True  # Explicitly mark the session as modified
         
         # Get token count for monitoring
         current_tokens = count_tokens(messages)
@@ -112,6 +113,7 @@ def clear_history():
             "content": "You are a helpful AI assistant. Provide clear and concise responses."
         }
     ]
+    session.modified = True
     return jsonify({'status': 'success'})
 
 if __name__ == '__main__':
